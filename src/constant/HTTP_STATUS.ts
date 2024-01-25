@@ -1,4 +1,4 @@
-export const HTTP_STATUS = {
+export const HTTP_STATUS: { [key: string]: number } = {
   OK: 200,
   CREATED: 1,
   ACCEPTED: 202,
