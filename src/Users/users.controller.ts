@@ -32,7 +32,7 @@ export class UserController {
       result
     }
   }
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Delete('/delete/:_id')
   async deleteUser(@Param('_id') _id: string) {
     if (!mongoose.isValidObjectId(_id)) throw new UnauthorizedException('ID is not valid')
