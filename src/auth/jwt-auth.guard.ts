@@ -13,6 +13,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     if (isPubic) return true
     return super.canActivate(context)
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   handleRequest(err, user, info) {
     if (err || !user) {
       throw err || new UnauthorizedException({ message: 'Invalid Token or Token Expired' })
