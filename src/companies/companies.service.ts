@@ -6,7 +6,6 @@ import { Company, CompanyDocument } from './schemas/company.schema'
 import { InjectModel } from '@nestjs/mongoose'
 import { UserType } from '~/interface/user.interface'
 import aqp from 'api-query-params'
-import { isEmpty } from 'class-validator'
 
 @Injectable()
 export class CompaniesService {
