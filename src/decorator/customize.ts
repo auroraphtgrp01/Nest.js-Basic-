@@ -8,3 +8,8 @@ export const User = createParamDecorator((data: string, ctx: ExecutionContext) =
   const user = request.user
   return data ? user?.[data] : user
 })
+
+export const RESPONSE_MESSAGE = 'response_message'
+export const ResponseMessage = (message: string) => {
+  return SetMetadata(RESPONSE_MESSAGE, message)
+}
