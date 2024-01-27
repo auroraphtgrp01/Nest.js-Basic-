@@ -6,10 +6,11 @@ import { Company, CompanyDocument } from './schemas/company.schema'
 import { InjectModel } from '@nestjs/mongoose'
 import { UserType } from '~/interface/user.interface'
 import aqp from 'api-query-params'
+import { PaginationQuery } from '~/utils/pagination_query.utils'
 
 @Injectable()
 export class CompaniesService {
-  constructor(@InjectModel(Company.name) private readonly companiesModel: SoftDeleteModel<CompanyDocument>) {}
+  constructor(@InjectModel(Company.name) private readonly companiesModel: SoftDeleteModel<CompanyDocument>) { }
   createCompany(createCompanyDto: CreateCompanyDto, user: UserType) {
     const result = this.companiesModel.create({
       ...createCompanyDto,
@@ -22,31 +23,8 @@ export class CompaniesService {
   }
 
   async findAll(currentPage: number, limit: number, qs: string) {
-    const { filter, sort, projection, population } = aqp(qs)
-    delete filter.page
-    delete filter.limit
-    console.log(filter)
-
-    const offset = (currentPage - 1) * limit
-    const defaultLimit = limit ? limit : 10
-    const totalItem = (await this.companiesModel.find(filter)).length
-    const totalPage = Math.ceil(totalItem / defaultLimit)
-    const result = await this.companiesModel
-      .find(filter)
-      .skip(offset)
-      .limit(defaultLimit)
-      .sort(sort as any)
-      .populate(population)
-      .exec()
-    return {
-      meta: {
-        currentPage: currentPage,
-        pageSize: limit,
-        pages: totalPage,
-        total: totalItem
-      },
-      result
-    }
+    const result = await PaginationQuery(qs, this.companiesModel)
+    return result
   }
 
   findOne(id: number) {
