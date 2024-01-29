@@ -22,16 +22,16 @@ export class CompaniesController {
     return this.companiesService.findAll(+page, +limit, qs)
   }
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.companiesService.findOne(+id)
+  async findOne(@Param('id') id: string) {
+    return await this.companiesService.findOne(id)
   }
   @ResponseMessage('Update Company !')
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto, @User() user: UserType) {
+  async update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto, @User() user: UserType) {
     if (!mongoose.isValidObjectId(id)) {
       return new HttpException('Invalid company id', HTTP_STATUS.NOT_FOUND)
     }
-    return this.companiesService.update(id, updateCompanyDto, user)
+    return await this.companiesService.update(id, updateCompanyDto, user)
   }
   @Delete(':id')
   remove(@Param('id') id: string, @User() user: UserType) {

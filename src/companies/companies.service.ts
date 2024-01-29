@@ -27,8 +27,9 @@ export class CompaniesService {
     return result
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} company`
+  async findOne(id: string) {
+    const result = await this.companiesModel.find({ _id: id })
+    return result
   }
 
   update(id: string, updateCompanyDto: UpdateCompanyDto, user: UserType) {

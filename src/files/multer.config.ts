@@ -1,9 +1,9 @@
-import { HttpStatus, Injectable, ParseFilePipeBuilder } from "@nestjs/common";
-import { MulterModuleOptions, MulterOptionsFactory } from "@nestjs/platform-express";
+import { HttpStatus, Injectable, ParseFilePipeBuilder } from '@nestjs/common'
+import { MulterModuleOptions, MulterOptionsFactory } from '@nestjs/platform-express'
 import fs from 'fs'
-import { diskStorage } from "multer";
-import path, { join } from "path";
-import { RESPONSE_MESSAGE } from "~/constant/message";
+import { diskStorage } from 'multer'
+import path, { join } from 'path'
+import { RESPONSE_MESSAGE } from '~/constant/message'
 @Injectable()
 export class MulterConfigService implements MulterOptionsFactory {
   getRootPath = () => {
@@ -36,17 +36,17 @@ export class MulterConfigService implements MulterOptionsFactory {
             return cb(new Error(RESPONSE_MESSAGE.FILE_IS_NOT_VALID), null)
           }
           const folder = req?.headers?.folder_type ?? 'default'
-          console.log(isValid);
-          this.ensureExists(`public/images/${folder}`);
+          console.log(isValid)
+          this.ensureExists(`public/images/${folder}`)
           cb(null, join(this.getRootPath(), `public/images/${folder}`))
         },
         filename: (req, file, cb) => {
-          const extName = path.extname(file.originalname);
-          const baseName = path.basename(file.originalname, extName);
+          const extName = path.extname(file.originalname)
+          const baseName = path.basename(file.originalname, extName)
           const finalName = `${baseName}-${Date.now()}${extName}`
           cb(null, finalName)
         }
       })
-    };
+    }
   }
 }
