@@ -10,7 +10,7 @@ import { PaginationQuery } from '~/utils/pagination_query.utils'
 
 @Injectable()
 export class CompaniesService {
-  constructor(@InjectModel(Company.name) private readonly companiesModel: SoftDeleteModel<CompanyDocument>) { }
+  constructor(@InjectModel(Company.name) private readonly companiesModel: SoftDeleteModel<CompanyDocument>) {}
   createCompany(createCompanyDto: CreateCompanyDto, user: UserType) {
     const result = this.companiesModel.create({
       ...createCompanyDto,

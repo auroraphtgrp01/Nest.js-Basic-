@@ -17,7 +17,7 @@ import { User, UserSchema } from '~/Users/schemas/User.schema'
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        secretOrPrivateKey: configService.get('JWT_ACCESS_TOKEN_SECRET_KEY'),
+        secret: configService.get('JWT_ACCESS_TOKEN_SECRET_KEY'),
         signOptions: {
           expiresIn: configService.get('JWT_EXPIRATION_TIME')
         }

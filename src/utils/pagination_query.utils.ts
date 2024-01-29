@@ -14,14 +14,17 @@ export interface DataQueryResponse {
 }
 
 export const PaginationQuery = async (queryString: string, model: any): Promise<DataQueryResponse> => {
-  const { filter, sort, projection, population, limit } = aqp(queryString)
-  const currentPage = filter.page ? filter.page : 1
-  const defaultLimit = filter.limit ? filter.limit : limit ? limit : 10
+  const queryParams = JSON.parse(JSON.stringify(queryString))
+  const { current, pageSize } = queryParams
+  const { filter, sort, projection, population } = aqp(queryString)
+  delete filter.current
+  delete filter.pageSize
+  const currentPage = current ? Number(current) : 1
+  const defaultLimit = pageSize ? Number(pageSize) : 10
   const offset = (currentPage - 1) * defaultLimit
   const totalItem = (await model.find(filter)).length
   const totalPage = Math.ceil(totalItem / defaultLimit)
-  delete filter.page
-  delete filter.limit
+
   const result = await model
     .find(filter)
     .skip(offset)
