@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common'
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UsePipes } from '@nestjs/common'
 import { ResumesService } from './resumes.service'
 import { CreateResumeDto } from './dto/create-resume.dto'
 import { UpdateResumeDto } from './dto/update-resume.dto'
@@ -6,6 +6,7 @@ import { ResponseMessage, User } from '~/decorator/customize'
 import { UserType } from '~/interface/user.interface'
 import { ResumeStatus } from '~/constant/status'
 import { use } from 'passport'
+import { ParseObjectIDPipe } from '~/pipe/customize'
 
 @Controller('resumes')
 export class ResumesController {
@@ -17,6 +18,7 @@ export class ResumesController {
    * @Public: false
    */
   @ResponseMessage('Create a new resume')
+  @UsePipes(new ParseObjectIDPipe())
   @Post()
   async create(@Body() createResumeDto: CreateResumeDto, @User() user: UserType) {
     return await this.resumesService.create(createResumeDto, user)
@@ -50,6 +52,7 @@ export class ResumesController {
    * @Public: false
    */
   @ResponseMessage('Change Status of resume')
+  @UsePipes(new ParseObjectIDPipe())
   @Patch(':id')
   async updateStatus(@Param('id') id: string, @Body('status') status: ResumeStatus, @User() user: UserType) {
     return this.resumesService.updateStatus(id, status, user)
@@ -61,6 +64,7 @@ export class ResumesController {
    * @Public: false
    */
   @ResponseMessage('Delete Resume by ID')
+  @UsePipes(new ParseObjectIDPipe())
   @Delete(':id')
   remove(@Param('id') id: string, @User() user: UserType) {
     return this.resumesService.remove(id, user)

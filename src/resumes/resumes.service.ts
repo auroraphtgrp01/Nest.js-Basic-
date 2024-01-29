@@ -7,7 +7,7 @@ import { Resume, ResumeDocument } from './schemas/resume.schema'
 import { UserType } from '~/interface/user.interface'
 import { ResumeStatus } from '~/constant/status'
 import { PaginationQuery } from '~/utils/pagination_query.utils'
-import mongoose from 'mongoose'
+import mongoose, { mongo } from 'mongoose'
 import { validateObjectID } from '~/utils/validation.utils'
 
 @Injectable()
@@ -15,7 +15,9 @@ export class ResumesService {
   constructor(@InjectModel(Resume.name) private readonly resumeModel: SoftDeleteModel<ResumeDocument>) {}
   async create(createResumeDto: CreateResumeDto, user: UserType) {
     const result = await this.resumeModel.create({
-      ...createResumeDto,
+      url: createResumeDto.url,
+      companyID: createResumeDto.companyID,
+      jobID: createResumeDto.jobID,
       userID: user._id,
       createdBy: {
         _id: user._id,
