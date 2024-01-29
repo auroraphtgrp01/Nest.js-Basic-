@@ -26,6 +26,7 @@ export const PaginationQuery = async (queryString: string, model: SoftDeleteMode
     .skip(offset)
     .limit(defaultLimit)
     .sort(sort as any)
+    .select(projection)
     .populate(population)
     .exec()
   return {

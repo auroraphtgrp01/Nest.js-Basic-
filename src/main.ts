@@ -6,6 +6,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard'
 import { TransformInterceptor } from './core/transform.interceptor'
 import { ErrorHandlerInterceptor } from './core/errorhandler.interceptor'
 import cookieParser from 'cookie-parser'
+import { join } from 'path'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
@@ -14,6 +15,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TransformInterceptor(reflector))
   app.useGlobalGuards(new JwtAuthGuard(reflector))
   app.useGlobalPipes(new ValidationPipe())
+  app.useStaticAssets(join(__dirname, '..', 'public'))
   app.setGlobalPrefix('api')
   app.enableVersioning({
     type: VersioningType.URI,
