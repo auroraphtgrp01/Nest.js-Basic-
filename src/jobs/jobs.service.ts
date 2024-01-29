@@ -9,7 +9,7 @@ import { PaginationQuery } from '~/utils/pagination_query.utils'
 
 @Injectable()
 export class JobsService {
-  constructor(@InjectModel(Job.name) private readonly jobModel: SoftDeleteModel<JobsDocument>) { }
+  constructor(@InjectModel(Job.name) private readonly jobModel: SoftDeleteModel<JobsDocument>) {}
   async create(createJobDto: CreateJobDto) {
     const result = await this.jobModel.create(createJobDto)
     return result
@@ -26,23 +26,30 @@ export class JobsService {
   }
 
   async update(id: string, updateJobDto: UpdateJobDto, user: UserType) {
-    const result = await this.jobModel.updateOne({ _id: id }, {
-      ...updateJobDto, updatedBy: {
-        id: user._id,
-        email: user.email
+    const result = await this.jobModel.updateOne(
+      { _id: id },
+      {
+        ...updateJobDto,
+        updatedBy: {
+          id: user._id,
+          email: user.email
+        }
       }
-    })
+    )
     return result
   }
 
   async remove(id: string, user: UserType) {
     const result = await this.jobModel.softDelete({ _id: id })
-    await this.jobModel.updateOne({ _id: id }, {
-      deletedBy: {
-        id: user._id,
-        email: user.email
+    await this.jobModel.updateOne(
+      { _id: id },
+      {
+        deletedBy: {
+          id: user._id,
+          email: user.email
+        }
       }
-    })
+    )
     return result
   }
 }

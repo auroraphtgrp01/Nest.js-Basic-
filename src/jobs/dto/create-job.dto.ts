@@ -46,5 +46,4 @@ export class CreateJobDto {
   @IsDateString()
   @IsNotEmpty({ message: 'EndDate is required' })
   endDate: Date
-
 }

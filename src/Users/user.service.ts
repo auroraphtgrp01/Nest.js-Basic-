@@ -10,7 +10,7 @@ import { PaginationQuery } from '~/utils/pagination_query.utils'
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private readonly userModel: SoftDeleteModel<UserDocument>) { }
+  constructor(@InjectModel(User.name) private readonly userModel: SoftDeleteModel<UserDocument>) {}
   async getUser(qs: string) {
     const result = await PaginationQuery(qs, this.userModel)
     return result

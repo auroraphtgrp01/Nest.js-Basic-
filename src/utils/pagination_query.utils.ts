@@ -1,8 +1,5 @@
 import aqp from 'api-query-params'
-import mongoose, { Document } from 'mongoose'
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose'
-
-interface ModelQuery<T extends Document<any, any, any>> { }
 export interface DataQueryResponse {
   meta: {
     currentPage: number
@@ -13,7 +10,7 @@ export interface DataQueryResponse {
   result: any[]
 }
 
-export const PaginationQuery = async (queryString: string, model: any): Promise<DataQueryResponse> => {
+export const PaginationQuery = async (queryString: string, model: SoftDeleteModel<any>): Promise<DataQueryResponse> => {
   const queryParams = JSON.parse(JSON.stringify(queryString))
   const { current, pageSize } = queryParams
   const { filter, sort, projection, population } = aqp(queryString)
@@ -24,7 +21,6 @@ export const PaginationQuery = async (queryString: string, model: any): Promise<
   const offset = (currentPage - 1) * defaultLimit
   const totalItem = (await model.find(filter)).length
   const totalPage = Math.ceil(totalItem / defaultLimit)
-
   const result = await model
     .find(filter)
     .skip(offset)
