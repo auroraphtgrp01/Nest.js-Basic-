@@ -9,10 +9,14 @@ import { JwtStrategy } from './passport/jwt.strategy'
 import { AuthController } from './auth.controller'
 import { MongooseModule } from '@nestjs/mongoose'
 import { User, UserSchema } from '~/Users/schemas/User.schema'
+import { RolesModule } from '~/roles/roles.module'
+import { RolesService } from '~/roles/roles.service'
+import { Role, RoleSchema } from '~/roles/schemas/role.schema'
 
 @Module({
   imports: [
     UserModule,
+    RolesModule,
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
@@ -28,6 +32,10 @@ import { User, UserSchema } from '~/Users/schemas/User.schema'
       {
         name: User.name,
         schema: UserSchema
+      },
+      {
+        name: Role.name,
+        schema: RoleSchema
       }
     ])
   ],

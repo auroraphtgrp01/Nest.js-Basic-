@@ -13,6 +13,8 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       throw new UnauthorizedException({ message: 'Invalid Username or Password' })
     }
+    console.log(user)
+
     return user
   }
 }

@@ -50,10 +50,11 @@ export class UserService {
       await this.userModel.findById(user_id, { password: 0 })
     ).populate({
       path: 'role',
-      populate: {
-        path: 'permissions',
-        select: { name: 1, _id: -1, apiPath: 1, method: 1 }
-      }
+      select: { name: 1 }
+      // populate: {
+      //   path: 'permissions',
+      //   select: { name: 1, _id: -1, apiPath: 1, method: 1 }
+      // }
     })
     if (!user) return 'user not found'
     return user
@@ -81,6 +82,11 @@ export class UserService {
     return await this.userModel.updateOne({ _id }, { refresh_token })
   }
   getUserByRefreshToken = async (refresh_token: string) => {
-    return await this.userModel.findOne({ refresh_token })
+    return (await this.userModel.findOne({ refresh_token })).populate({
+      path: 'role',
+      select: {
+        name: 1
+      }
+    })
   }
 }

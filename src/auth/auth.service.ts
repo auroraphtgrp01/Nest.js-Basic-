@@ -9,8 +9,11 @@ import { RegisterUserDto } from '~/Users/dto/create-user.dto'
 import { User, UserDocument } from '~/Users/schemas/User.schema'
 import { UserService } from '~/Users/user.service'
 import { HTTP_STATUS } from '~/constant/HTTP_STATUS'
+import { USER_ROLE } from '~/databases/seeder'
 
 import { UserType } from '~/interface/user.interface'
+import { RolesService } from '~/roles/roles.service'
+import { Role, RoleDocument } from '~/roles/schemas/role.schema'
 import { comparePassword, hashPassword } from '~/utils/hashPassword'
 
 @Injectable()
@@ -19,34 +22,49 @@ export class AuthService {
     private usersService: UserService,
     private jwtService: JwtService,
     private readonly configService: ConfigService,
-    @InjectModel(User.name) private readonly userModel: SoftDeleteModel<UserDocument>
+    @InjectModel(User.name) private readonly userModel: SoftDeleteModel<UserDocument>,
+    @InjectModel(Role.name) private readonly roleModel: SoftDeleteModel<RoleDocument>,
+    private readonly roleServie: RolesService
   ) {}
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.usersService.findOne(email)
     if (user) {
+      const { password } = user
+      const isValid = comparePassword(pass, password)
+      if (!isValid) return null
       user.role
         ? (
             await user.populate({
               path: 'role',
-              select: '-deletedAt -createdBy -createdAt -updatedAt -__v -isDeleted'
+              select: { name: 1, _id: 1 }
             })
           ).name
         : null
-      const { password } = user
-      const isValid = comparePassword(pass, password)
-      if (isValid) return user
+      const userRole = user.role as unknown as {
+        _id: string
+        name: string
+      }
+      const temp = await this.roleServie.findOne(userRole._id)
+      const objUser = {
+        ...user.toObject(),
+        permissions: temp?.permissions ?? [],
+        roless: userRole
+      }
+      return objUser
     }
     return null
   }
   async login(user: UserType, res: Response) {
-    const { _id, role, name, email } = user
+    // const { permissions } = await this.roleServie.findOne(user.role._id) as any
+    const { _id, role, name, email, permissions } = user
     const payload = {
       email: user.email,
       sub: 'Token Login',
       iss: 'From Server',
       _id,
       role,
-      name
+      name,
+      permissions
     }
     const refresh_token = this.signRefreshToken(payload)
     await this.usersService.updateUserToken(refresh_token, _id)
@@ -55,19 +73,21 @@ export class AuthService {
       maxAge: ms(this.configService.get<string>('JWT_REFRESH_TOKEN_EXPIRATION_TIME')) * 10000
     })
     return {
-      access_token: this.jwtService.sign(payload),
-      refresh_token,
       user: {
         _id,
         role,
         name,
-        email
-      }
+        email,
+        permissions
+      },
+      access_token: this.jwtService.sign(payload),
+      refresh_token
     }
   }
   async register(registerUserDto: RegisterUserDto) {
     const hashP = await hashPassword(registerUserDto.password)
-    const result = await this.userModel.create({ ...registerUserDto, password: hashP })
+    const userRole = await this.roleModel.findOne({ name: USER_ROLE })
+    const result = await this.userModel.create({ ...registerUserDto, password: hashP, role: userRole?._id })
     return result
   }
   signRefreshToken = (payload: any) => {
@@ -83,17 +103,37 @@ export class AuthService {
       })
       const user = await this.usersService.getUserByRefreshToken(refresh_token)
       if (user) {
-        const { _id, role, name, email } = user
+        user.role
+          ? (
+              await user.populate({
+                path: 'role',
+                select: { name: 1, _id: 1 }
+              })
+            ).name
+          : null
+        const userRole = user.role as unknown as {
+          _id: string
+          name: string
+        }
+        const temp = await this.roleServie.findOne(userRole._id)
+        const objUser = {
+          ...user.toObject(),
+          permissions: temp?.permissions ?? [],
+          roless: userRole
+        }
+        const { _id, role, name, email, permissions } = objUser
         const payload = {
           email: user.email,
           sub: 'Token Login',
           iss: 'From Server',
           _id,
           role,
-          name
+          name,
+          permissions
         }
         const refresh_token = this.signRefreshToken(payload)
         await this.usersService.updateUserToken(refresh_token, _id.toString())
+
         res.clearCookie('refresh_token')
         res.cookie('refresh_token', refresh_token, {
           httpOnly: true,
@@ -101,18 +141,17 @@ export class AuthService {
         })
         return {
           access_token: this.jwtService.sign(payload),
-          refresh_token,
           user: {
             _id,
             role,
             name,
-            email
+            email,
+            permissions
           }
         }
       } else {
         throw new HttpException('Refresh Token Invalid', HTTP_STATUS.BAD_REQUEST)
       }
-      console.log(user)
     } catch (error) {
       throw new HttpException('Refresh Token Invalid', HTTP_STATUS.BAD_REQUEST)
     }
