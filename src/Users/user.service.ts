@@ -7,12 +7,30 @@ import { hashPassword } from '~/utils/hashPassword'
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose'
 import { UserType } from '~/interface/user.interface'
 import { PaginationQuery } from '~/utils/pagination_query.utils'
+import aqp from 'api-query-params'
+import { PopulateOptions } from 'mongoose'
 
 @Injectable()
 export class UserService {
   constructor(@InjectModel(User.name) private readonly userModel: SoftDeleteModel<UserDocument>) {}
   async getUser(qs: string) {
-    const result = await PaginationQuery(qs, this.userModel)
+    const queryString = JSON.parse(JSON.stringify(qs))
+    const { filter, sort, projection } = aqp(queryString)
+    const population_modify: PopulateOptions[] = [
+      {
+        path: 'role',
+        populate: {
+          path: 'permissions'
+        }
+      }
+    ]
+    const projection_modify = '-password -refresh_token' as any
+    const result = await PaginationQuery(queryString, this.userModel, {
+      filter: filter,
+      sort: sort,
+      projection: projection_modify,
+      population: population_modify
+    })
     return result
   }
   async createUser(createUserDto: CreateUserDto, user: UserType) {
@@ -28,7 +46,15 @@ export class UserService {
     return users
   }
   async getUserById(user_id: string) {
-    const user = await this.userModel.findById(user_id, { password: 0 })
+    const user = await (
+      await this.userModel.findById(user_id, { password: 0 })
+    ).populate({
+      path: 'role',
+      populate: {
+        path: 'permissions',
+        select: { name: 1, _id: -1, apiPath: 1, method: 1 }
+      }
+    })
     if (!user) return 'user not found'
     return user
   }

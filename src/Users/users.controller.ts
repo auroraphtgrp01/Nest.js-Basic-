@@ -29,7 +29,7 @@ export class UserController {
     Description: Create new user from admin
   */
   @ResponseMessage('Create A User From Admin')
-  @Post('')
+  @Post()
   createUser(@Body() CreateUserDto: CreateUserDto, @User() user: UserType) {
     return this.userService.createUser(CreateUserDto, user)
   }

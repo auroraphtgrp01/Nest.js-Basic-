@@ -1,6 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { HydratedDocument } from 'mongoose'
+import { Company } from '~/companies/schemas/company.schema'
 import { ResumeStatus } from '~/constant/status'
+import { Job } from '~/jobs/schemas/job.schemas'
 
 export type ResumeDocument = HydratedDocument<Resume>
 export interface HistoryResume {
@@ -26,13 +28,13 @@ export class Resume {
   @Prop()
   status: ResumeStatus
 
-  @Prop()
-  companyID: mongoose.Types.ObjectId
+  @Prop({ type: mongoose.Types.ObjectId, ref: Company.name })
+  companyID: mongoose.Schema.Types.ObjectId
 
-  @Prop()
-  jobID: mongoose.Types.ObjectId
+  @Prop({ type: mongoose.Types.ObjectId, ref: Job.name })
+  jobID: mongoose.Schema.Types.ObjectId
 
-  @Prop()
+  @Prop({ type: mongoose.Schema.Types.Array })
   history: HistoryResume[]
 
   @Prop()

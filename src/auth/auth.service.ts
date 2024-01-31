@@ -24,8 +24,16 @@ export class AuthService {
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.usersService.findOne(email)
     if (user) {
+      user.role
+        ? (
+            await user.populate({
+              path: 'role',
+              select: '-deletedAt -createdBy -createdAt -updatedAt -__v -isDeleted'
+            })
+          ).name
+        : null
       const { password } = user
-      const isValid = await comparePassword(pass, password)
+      const isValid = comparePassword(pass, password)
       if (isValid) return user
     }
     return null

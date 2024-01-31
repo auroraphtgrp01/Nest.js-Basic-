@@ -15,6 +15,7 @@ export class AuthController {
    * @Access: Public
    * @Desc: Login User
    */
+  @Public()
   @UseGuards(LocalAuthGuard)
   @ResponseMessage('User Login')
   @Post('login')

@@ -1,4 +1,5 @@
 import aqp from 'api-query-params'
+import { PopulateOptions } from 'mongoose'
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose'
 export interface DataQueryResponse {
   meta: {
@@ -10,10 +11,21 @@ export interface DataQueryResponse {
   result: any[]
 }
 
-export const PaginationQuery = async (queryString: string, model: SoftDeleteModel<any>): Promise<DataQueryResponse> => {
+interface PaginationQueryOptions {
+  filter?: Record<string, any>
+  sort?: Record<string, any>
+  projection?: Record<string, any>
+  population?: PopulateOptions[]
+}
+
+export const PaginationQuery = async (
+  queryString: string,
+  model: SoftDeleteModel<any>,
+  options?: PaginationQueryOptions
+): Promise<DataQueryResponse> => {
   const queryParams = JSON.parse(JSON.stringify(queryString))
   const { current, pageSize } = queryParams
-  const { filter, sort, projection, population } = aqp(queryString)
+  const { filter, sort, projection, population } = options ? options : aqp(queryParams)
   delete filter.current
   delete filter.pageSize
   const currentPage = current ? Number(current) : 1

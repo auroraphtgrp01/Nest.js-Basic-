@@ -1,6 +1,7 @@
-import { IsEmail, IsNotEmpty, IsNotEmptyObject, IsObject, ValidateNested } from 'class-validator'
+import { IsEmail, IsMongoId, IsNotEmpty, IsNotEmptyObject, IsObject, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import mongoose from 'mongoose'
+import { RESPONSE_MESSAGE } from '~/constant/message'
 
 class Company {
   @IsNotEmpty({ message: '_Id company is required' })
@@ -27,6 +28,7 @@ export class CreateUserDto {
   gender: string
 
   @IsNotEmpty({ message: 'Role is required' })
+  @IsMongoId({ message: RESPONSE_MESSAGE.MONGO_ID_IS_INVALID })
   role: string
 
   @IsNotEmpty({ message: 'Address is required' })

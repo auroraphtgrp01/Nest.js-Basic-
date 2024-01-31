@@ -7,6 +7,7 @@ import { TransformInterceptor } from './core/transform.interceptor'
 import { ErrorHandlerInterceptor } from './core/errorhandler.interceptor'
 import cookieParser from 'cookie-parser'
 import { join } from 'path'
+import { ParseObjectIDPipe } from './pipe/customize'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
@@ -15,6 +16,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TransformInterceptor(reflector))
   app.useGlobalGuards(new JwtAuthGuard(reflector))
   app.useGlobalPipes(new ValidationPipe())
+  app.useGlobalPipes(new ParseObjectIDPipe())
   app.useStaticAssets(join(__dirname, '..', 'public'))
   app.setGlobalPrefix('api')
   app.enableVersioning({
@@ -23,9 +25,10 @@ async function bootstrap() {
   })
   app.use(cookieParser())
   app.enableCors({
-    origin: '*',
+    origin: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false
+    preflightContinue: false,
+    credentials: true
   })
   await app.listen(3000)
 }

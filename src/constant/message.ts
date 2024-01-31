@@ -19,5 +19,14 @@ export const RESPONSE_MESSAGE = {
   DESCRIPTION_IS_REQUIRED: 'Description is required',
   START_DATE_IS_REQUIRED: 'StartDate is required',
   END_DATE_IS_REQUIRED: 'EndDate is required',
-  ID_IS_INVALID: 'ID is invalid'
+  ID_IS_INVALID: 'ID is invalid',
+  NAME_MUST_BE_STRING: 'Name must be string',
+  API_PATH_MUST_BE_STRING: 'ApiPath must be string',
+  METHOD_MUST_BE_STRING: 'Method must be string',
+  MODULE_MUST_BE_STRING: 'Module must be string',
+  MODULE_IS_REQUIRED: 'Module is required',
+  PERMISSIONS_IS_REQUIRED: 'Permissions is required',
+  STATUS_MUST_BE_BOOLEAN: 'Status must be boolean',
+  PERMISSIONS_IS_ARRAY: 'Permissions is array',
+  MONGO_ID_IS_INVALID: 'Mongo ID is invalid'
 }
