@@ -28,5 +28,7 @@ export const RESPONSE_MESSAGE = {
   PERMISSIONS_IS_REQUIRED: 'Permissions is required',
   STATUS_MUST_BE_BOOLEAN: 'Status must be boolean',
   PERMISSIONS_IS_ARRAY: 'Permissions is array',
-  MONGO_ID_IS_INVALID: 'Mongo ID is invalid'
+  MONGO_ID_IS_INVALID: 'Mongo ID is invalid',
+  SKILLS_MUST_BE_STRING: 'Skills must be string',
+  SKILLS_MUST_BE_ARRAY: 'Skills must be array'
 }

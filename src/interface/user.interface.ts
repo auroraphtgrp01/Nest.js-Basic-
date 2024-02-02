@@ -13,3 +13,13 @@ export interface UserType {
     module: string
   }[]
 }
+export interface IMailSender {
+  to: string
+  name: string
+  jobs: {
+    name: string
+    company: string
+    salary: string
+    skills: string[]
+  }[]
+}

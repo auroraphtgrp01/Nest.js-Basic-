@@ -21,12 +21,13 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     }
     const request: Request = context.switchToHttp().getRequest()
     const targetMethod = request.method
-    const targetEndpoint = request?.route.path
+    const targetEndpoint = request?.route.path as string
     const permissions = user.permissions ?? []
-    const isAlowed = permissions.some((permissions) => {
+    let isAlowed: boolean = permissions.some((permissions) => {
       const { method, apiPath } = permissions
       if (targetEndpoint.includes(apiPath) && method === targetMethod) return true
     })
+    if (targetEndpoint.startsWith('/api/v1/auth')) isAlowed = true
     if (!isAlowed) {
       throw new ForbiddenException({ message: 'You dont have permission to access this endpoint' })
     }

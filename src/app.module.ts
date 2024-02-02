@@ -15,6 +15,8 @@ import { ResumesModule } from './resumes/resumes.module'
 import { PermissionModule } from './permission/permission.module'
 import { RolesModule } from './roles/roles.module'
 import { DatabasesModule } from './databases/databases.module'
+import { SubscribersModule } from './subscribers/subscribers.module'
+import { MailerModule } from './mailer/mailer.module'
 @Module({
   imports: [
     UserModule,
@@ -40,7 +42,9 @@ import { DatabasesModule } from './databases/databases.module'
     ResumesModule,
     PermissionModule,
     RolesModule,
-    DatabasesModule
+    DatabasesModule,
+    SubscribersModule,
+    MailerModule
   ],
   controllers: [AppController],
   providers: [
