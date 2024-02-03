@@ -8,6 +8,8 @@ import { ErrorHandlerInterceptor } from './core/errorhandler.interceptor'
 import cookieParser from 'cookie-parser'
 import { join } from 'path'
 import { ParseObjectIDPipe } from './pipe/customize'
+import helmet from 'helmet';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
@@ -15,7 +17,9 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ErrorHandlerInterceptor())
   app.useGlobalInterceptors(new TransformInterceptor(reflector))
   app.useGlobalGuards(new JwtAuthGuard(reflector))
-  app.useGlobalPipes(new ValidationPipe())
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+  }))
   app.useGlobalPipes(new ParseObjectIDPipe())
   app.useStaticAssets(join(__dirname, '..', 'public'))
   app.setGlobalPrefix('api')
@@ -30,6 +34,24 @@ async function bootstrap() {
     preflightContinue: false,
     credentials: true
   })
+  app.use(helmet());
+  const config = new DocumentBuilder()
+    .setTitle('NestJS APIs Documentation')
+    .setDescription('NestJS APIs Documentation')
+    .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'Bearer',
+        bearerFormat: 'JWT',
+        in: 'header',
+      },
+      'token',
+    )
+    .addSecurityRequirements('token')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
   await app.listen(3000)
 }
 bootstrap()

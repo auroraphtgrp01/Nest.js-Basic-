@@ -2,12 +2,14 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { SubscribersService } from './subscribers.service'
 import { CreateSubscriberDto } from './dto/create-subscriber.dto'
 import { UpdateSubscriberDto } from './dto/update-subscriber.dto'
-import { ResponseMessage, User } from '~/decorator/customize'
+import { ResponseMessage, SkipPermission, User } from '~/decorator/customize'
 import { UserType } from '~/interface/user.interface'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags('Subscribers')
 @Controller('subscribers')
 export class SubscribersController {
-  constructor(private readonly subscribersService: SubscribersService) {}
+  constructor(private readonly subscribersService: SubscribersService) { }
   /*
    * @Route: /subscribers
    * @Method: POST
@@ -46,9 +48,10 @@ export class SubscribersController {
    * @Access: JWT
    * @Desc: Update subscribers with id
    */
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSubscriberDto: UpdateSubscriberDto, @User() user: UserType) {
-    return this.subscribersService.update(id, updateSubscriberDto, user)
+  @Patch()
+  @SkipPermission()
+  update(@Body() updateSubscriberDto: UpdateSubscriberDto, @User() user: UserType) {
+    return this.subscribersService.update(updateSubscriberDto, user)
   }
   /*
    * @Route: /subscribers/:id
@@ -59,5 +62,11 @@ export class SubscribersController {
   @Delete(':id')
   async remove(@Param('id') id: string, @User() user: UserType) {
     return await this.subscribersService.remove(id, user)
+  }
+
+  @Post('skills')
+  @SkipPermission()
+  async getSkill(@User() user: UserType) {
+    return await this.subscribersService.getSkill(user)
   }
 }

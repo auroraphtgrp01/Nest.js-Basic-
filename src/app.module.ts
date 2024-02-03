@@ -17,8 +17,17 @@ import { RolesModule } from './roles/roles.module'
 import { DatabasesModule } from './databases/databases.module'
 import { SubscribersModule } from './subscribers/subscribers.module'
 import { MailerModule } from './mailer/mailer.module'
+import { ScheduleModule } from '@nestjs/schedule';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler'
+import { APP_GUARD } from '@nestjs/core'
+
 @Module({
   imports: [
+    ThrottlerModule.forRoot([{
+      ttl: 60,
+      limit: 2
+    }]),
+    ScheduleModule.forRoot(),
     UserModule,
     ConfigModule.forRoot({
       envFilePath: '.env',
@@ -48,11 +57,15 @@ import { MailerModule } from './mailer/mailer.module'
   ],
   controllers: [AppController],
   providers: [
-    AppService
+    AppService,
     // {
     //   provide: APP_GUARD,
     //   useClass: JwtAuthGuard
     // }
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard
+    }
   ]
 })
-export class AppModule {}
+export class AppModule { }

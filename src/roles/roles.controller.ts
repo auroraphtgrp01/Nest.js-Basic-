@@ -4,10 +4,12 @@ import { CreateRoleDto } from './dto/create-role.dto'
 import { UpdateRoleDto } from './dto/update-role.dto'
 import { User } from '~/decorator/customize'
 import { UserType } from '~/interface/user.interface'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags('Roles')
 @Controller('roles')
 export class RolesController {
-  constructor(private readonly rolesService: RolesService) {}
+  constructor(private readonly rolesService: RolesService) { }
   /*
    * @Method: POST
    * @Route : /roles

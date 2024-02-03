@@ -1,0 +1,1000 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>nest_project documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">nest_project documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Variables</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#ADMIN_ROLE" title="src/databases/seeder.ts" ><b>ADMIN_ROLE</b>&nbsp;&nbsp;&nbsp;(src/.../seeder.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CompanySchema" title="src/companies/schemas/company.schema.ts" ><b>CompanySchema</b>&nbsp;&nbsp;&nbsp;(src/.../company.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#comparePassword" title="src/utils/hashPassword.ts" ><b>comparePassword</b>&nbsp;&nbsp;&nbsp;(src/.../hashPassword.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#hashPassword" title="src/utils/hashPassword.ts" ><b>hashPassword</b>&nbsp;&nbsp;&nbsp;(src/.../hashPassword.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#HTTP_STATUS" title="src/constant/HTTP_STATUS.ts" ><b>HTTP_STATUS</b>&nbsp;&nbsp;&nbsp;(src/.../HTTP_STATUS.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#INIT_PERMISSIONS" title="src/databases/seeder.ts" ><b>INIT_PERMISSIONS</b>&nbsp;&nbsp;&nbsp;(src/.../seeder.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#IS_PUBLIC_KEY" title="src/decorator/customize.ts" ><b>IS_PUBLIC_KEY</b>&nbsp;&nbsp;&nbsp;(src/.../customize.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#IS_PUBLIC_PERMISSION" title="src/decorator/customize.ts" ><b>IS_PUBLIC_PERMISSION</b>&nbsp;&nbsp;&nbsp;(src/.../customize.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#JobSchema" title="src/jobs/schemas/job.schemas.ts" ><b>JobSchema</b>&nbsp;&nbsp;&nbsp;(src/.../job.schemas.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PaginationQuery" title="src/utils/pagination_query.utils.ts" ><b>PaginationQuery</b>&nbsp;&nbsp;&nbsp;(src/.../pagination_query.utils.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PermissionSchema" title="src/permission/schemas/permission.schema.ts" ><b>PermissionSchema</b>&nbsp;&nbsp;&nbsp;(src/.../permission.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Public" title="src/decorator/customize.ts" ><b>Public</b>&nbsp;&nbsp;&nbsp;(src/.../customize.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RESPONSE_MESSAGE" title="src/constant/message.ts" ><b>RESPONSE_MESSAGE</b>&nbsp;&nbsp;&nbsp;(src/.../message.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RESPONSE_MESSAGE" title="src/decorator/customize.ts" ><b>RESPONSE_MESSAGE</b>&nbsp;&nbsp;&nbsp;(src/.../customize.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ResponseMessage" title="src/decorator/customize.ts" ><b>ResponseMessage</b>&nbsp;&nbsp;&nbsp;(src/.../customize.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ResumeSchema" title="src/resumes/schemas/resume.schema.ts" ><b>ResumeSchema</b>&nbsp;&nbsp;&nbsp;(src/.../resume.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RoleSchema" title="src/roles/schemas/role.schema.ts" ><b>RoleSchema</b>&nbsp;&nbsp;&nbsp;(src/.../role.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SkipPermission" title="src/decorator/customize.ts" ><b>SkipPermission</b>&nbsp;&nbsp;&nbsp;(src/.../customize.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SubscriberSchema" title="src/subscribers/schemas/subscriber.schema.ts" ><b>SubscriberSchema</b>&nbsp;&nbsp;&nbsp;(src/.../subscriber.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#User" title="src/decorator/customize.ts" ><b>User</b>&nbsp;&nbsp;&nbsp;(src/.../customize.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#USER_ROLE" title="src/databases/seeder.ts" ><b>USER_ROLE</b>&nbsp;&nbsp;&nbsp;(src/.../seeder.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UserSchema" title="src/Users/schemas/User.schema.ts" ><b>UserSchema</b>&nbsp;&nbsp;&nbsp;(src/.../User.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#validateObjectID" title="src/utils/validation.utils.ts" ><b>validateObjectID</b>&nbsp;&nbsp;&nbsp;(src/.../validation.utils.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/databases/seeder.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ADMIN_ROLE"></a>
+                    <span class="name">
+                        <span ><b>ADMIN_ROLE</b></span>
+                        <a href="#ADMIN_ROLE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;SUPER ADMIN&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="INIT_PERMISSIONS"></a>
+                    <span class="name">
+                        <span ><b>INIT_PERMISSIONS</b></span>
+                        <a href="#INIT_PERMISSIONS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  {
+    name: &#x27;Create new User From Admin&#x27;,
+    apiPath: &#x27;/users&#x27;,
+    method: &#x27;POST&#x27;,
+    module: &#x27;USER&#x27;,
+    deletedAt: null,
+    isDeleted: false,
+    createdAt: &#x27;2024-01-31T08:32:13.474Z&#x27;,
+    updatedAt: &#x27;2024-01-31T08:32:13.474Z&#x27;,
+    __v: 0
+  },
+  {
+    name: &#x27;Get all User From Admin&#x27;,
+    apiPath: &#x27;/users&#x27;,
+    method: &#x27;GET&#x27;,
+    module: &#x27;USER&#x27;,
+    deletedAt: null,
+    isDeleted: false,
+    createdAt: &#x27;2024-01-31T08:32:13.801Z&#x27;,
+    updatedAt: &#x27;2024-01-31T08:32:13.801Z&#x27;,
+    __v: 0
+  },
+  {
+    name: &#x27;Register&#x27;,
+    apiPath: &#x27;/auth/register&#x27;,
+    method: &#x27;POST&#x27;,
+    module: &#x27;AUTH&#x27;,
+    deletedAt: null,
+    isDeleted: false,
+    createdAt: &#x27;2024-01-31T08:32:13.864Z&#x27;,
+    updatedAt: &#x27;2024-01-31T08:32:13.864Z&#x27;,
+    __v: 0
+  },
+  {
+    name: &#x27;Create a new Job&#x27;,
+    apiPath: &#x27;/jobs&#x27;,
+    method: &#x27;POST&#x27;,
+    module: &#x27;JOB&#x27;,
+    deletedAt: null,
+    isDeleted: false,
+    createdAt: &#x27;2024-01-31T08:32:13.923Z&#x27;,
+    updatedAt: &#x27;2024-01-31T08:32:13.923Z&#x27;,
+    __v: 0
+  },
+  // Subcribers
+  {
+    name: &#x27;Create a new Subcriber&#x27;,
+    apiPath: &#x27;/subscribers&#x27;,
+    method: &#x27;POST&#x27;,
+    module: &#x27;SUBCRIBER&#x27;,
+    deletedAt: null,
+    isDeleted: false,
+    createdAt: &#x27;2024-01-31T08:32:13.923Z&#x27;,
+    updatedAt: &#x27;2024-01-31T08:32:13.923Z&#x27;
+  },
+  {
+    name: &#x27;Get all Subcribers with Pagination&#x27;,
+    apiPath: &#x27;/subscribers&#x27;,
+    method: &#x27;GET&#x27;,
+    module: &#x27;SUBCRIBER&#x27;,
+    deletedAt: null,
+    isDeleted: false,
+    createdAt: &#x27;2024-01-31T08:32:13.923Z&#x27;,
+    updatedAt: &#x27;2024-01-31T08:32:13.923Z&#x27;
+  },
+  {
+    name: &#x27;Get Subcriber with ID&#x27;,
+    apiPath: &#x27;/subscribers/:id&#x27;,
+    method: &#x27;GET&#x27;,
+    module: &#x27;SUBCRIBER&#x27;,
+    deletedAt: null,
+    isDeleted: false,
+    createdAt: &#x27;2024-01-31T08:32:13.923Z&#x27;,
+    updatedAt: &#x27;2024-01-31T08:32:13.923Z&#x27;
+  },
+  {
+    name: &#x27;Update Subcriber with ID&#x27;,
+    apiPath: &#x27;/subscribers/:id&#x27;,
+    method: &#x27;PATCH&#x27;,
+    module: &#x27;SUBCRIBER&#x27;,
+    deletedAt: null,
+    isDeleted: false,
+    createdAt: &#x27;2024-01-31T08:32:13.923Z&#x27;,
+    updatedAt: &#x27;2024-01-31T08:32:13.923Z&#x27;
+  },
+  {
+    name: &#x27;Delete Subcriber with ID&#x27;,
+    apiPath: &#x27;/subscribers/:id&#x27;,
+    method: &#x27;DELETE&#x27;,
+    module: &#x27;SUBCRIBER&#x27;,
+    deletedAt: null,
+    isDeleted: false,
+    createdAt: &#x27;2024-01-31T08:32:13.923Z&#x27;,
+    updatedAt: &#x27;2024-01-31T08:32:13.923Z&#x27;
+  }
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="USER_ROLE"></a>
+                    <span class="name">
+                        <span ><b>USER_ROLE</b></span>
+                        <a href="#USER_ROLE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;NORMAL USER&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/companies/schemas/company.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CompanySchema"></a>
+                    <span class="name">
+                        <span ><b>CompanySchema</b></span>
+                        <a href="#CompanySchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Company)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/utils/hashPassword.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="comparePassword"></a>
+                    <span class="name">
+                        <span ><b>comparePassword</b></span>
+                        <a href="#comparePassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(password: string, hashedPassword: string): boolean &#x3D;&gt; {
+  const isMatch &#x3D; compareSync(password, hashedPassword)
+  return isMatch
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hashPassword"></a>
+                    <span class="name">
+                        <span ><b>hashPassword</b></span>
+                        <a href="#hashPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>async (password: string) &#x3D;&gt; {
+  const salt &#x3D; await genSalt(10)
+  const hashedPassword &#x3D; await hash(password, salt as string)
+  return hashedPassword
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/constant/HTTP_STATUS.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="HTTP_STATUS"></a>
+                    <span class="name">
+                        <span ><b>HTTP_STATUS</b></span>
+                        <a href="#HTTP_STATUS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  OK: 200,
+  CREATED: 1,
+  ACCEPTED: 202,
+  NO_CONTENT: 204,
+  UNPROCESSABLE_ENTITY: 422,
+  UNAUTHORIZED: 401,
+  NOT_FOUND: 404,
+  INTERNAL_SERVER_ERROR: 500,
+  BAD_REQUEST: 400,
+  SERVICE_UNAVAILABLE: 503,
+  FORBIDDEN: 403,
+  PARTIAL_CONTENT: 206
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/decorator/customize.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="IS_PUBLIC_KEY"></a>
+                    <span class="name">
+                        <span ><b>IS_PUBLIC_KEY</b></span>
+                        <a href="#IS_PUBLIC_KEY"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;isPublic&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="IS_PUBLIC_PERMISSION"></a>
+                    <span class="name">
+                        <span ><b>IS_PUBLIC_PERMISSION</b></span>
+                        <a href="#IS_PUBLIC_PERMISSION"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;isPublicPermission&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Public"></a>
+                    <span class="name">
+                        <span ><b>Public</b></span>
+                        <a href="#Public"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; SetMetadata(IS_PUBLIC_KEY, true)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RESPONSE_MESSAGE"></a>
+                    <span class="name">
+                        <span ><b>RESPONSE_MESSAGE</b></span>
+                        <a href="#RESPONSE_MESSAGE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;response_message&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ResponseMessage"></a>
+                    <span class="name">
+                        <span ><b>ResponseMessage</b></span>
+                        <a href="#ResponseMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(message: string) &#x3D;&gt; {
+  return SetMetadata(RESPONSE_MESSAGE, message)
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SkipPermission"></a>
+                    <span class="name">
+                        <span ><b>SkipPermission</b></span>
+                        <a href="#SkipPermission"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; SetMetadata(IS_PUBLIC_PERMISSION, true)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="User"></a>
+                    <span class="name">
+                        <span ><b>User</b></span>
+                        <a href="#User"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createParamDecorator((data: string, ctx: ExecutionContext) &#x3D;&gt; {
+  const request &#x3D; ctx.switchToHttp().getRequest()
+  const user &#x3D; request.user
+  return data ? user?.[data] : user
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/jobs/schemas/job.schemas.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="JobSchema"></a>
+                    <span class="name">
+                        <span ><b>JobSchema</b></span>
+                        <a href="#JobSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Job)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/utils/pagination_query.utils.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="PaginationQuery"></a>
+                    <span class="name">
+                        <span ><b>PaginationQuery</b></span>
+                        <a href="#PaginationQuery"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>async (
+  queryString: string,
+  model: SoftDeleteModel&lt;any&gt;,
+  options?: PaginationQueryOptions
+): Promise&lt;DataQueryResponse&gt; &#x3D;&gt; {
+  const queryParams &#x3D; JSON.parse(JSON.stringify(queryString))
+  const { current, pageSize } &#x3D; queryParams
+  const { filter, sort, projection, population } &#x3D; options ? options : aqp(queryParams)
+  delete filter.current
+  delete filter.pageSize
+  const currentPage &#x3D; current ? Number(current) : 1
+  const defaultLimit &#x3D; pageSize ? Number(pageSize) : 10
+  const offset &#x3D; (currentPage - 1) * defaultLimit
+  const totalItem &#x3D; (await model.find(filter)).length
+  const totalPage &#x3D; Math.ceil(totalItem / defaultLimit)
+  const result &#x3D; await model
+    .find(filter)
+    .skip(offset)
+    .limit(defaultLimit)
+    .sort(sort as any)
+    .select(projection)
+    .populate(population)
+    .exec()
+  return {
+    meta: {
+      currentPage: currentPage,
+      pageSize: defaultLimit,
+      pages: totalPage,
+      total: totalItem
+    },
+    result
+  }
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/permission/schemas/permission.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="PermissionSchema"></a>
+                    <span class="name">
+                        <span ><b>PermissionSchema</b></span>
+                        <a href="#PermissionSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Permission)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/constant/message.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RESPONSE_MESSAGE"></a>
+                    <span class="name">
+                        <span ><b>RESPONSE_MESSAGE</b></span>
+                        <a href="#RESPONSE_MESSAGE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  FILE_IS_NOT_VALID: &#x27;File is not valid&#x27;,
+  EMAIL_IS_INVALID: &#x27;Email is invalid&#x27;,
+  EMAIL_IS_REQUIRED: &#x27;Email is required&#x27;,
+  USER_ID_IS_REQUIRED: &#x27;User ID is required&#x27;,
+  URL_IS_REQUIRED: &#x27;URL is required&#x27;,
+  STATUS_IS_REQUIRED: &#x27;Status is required&#x27;,
+  COMPANY_ID_IS_REQUIRED: &#x27;Company ID is required&#x27;,
+  JOB_ID_IS_REQUIRED: &#x27;Job ID is required&#x27;,
+  HISTORY_IS_REQUIRED: &#x27;History is required&#x27;,
+  NAME_IS_REQUIRED: &#x27;Name is required&#x27;,
+  SKILLS_IS_ARRAY: &#x27;Skills is array&#x27;,
+  SKILLS_IS_REQUIRED: &#x27;Skills is required&#x27;,
+  COMPANY_IS_REQUIRED: &#x27;Company is required&#x27;,
+  LOCATION_IS_REQUIRED: &#x27;Location is required&#x27;,
+  SALARY_IS_REQUIRED: &#x27;Salary is required&#x27;,
+  QUANTITY_IS_REQUIRED: &#x27;Quantity is required&#x27;,
+  LEVEL_IS_REQUIRED: &#x27;Level is required&#x27;,
+  DESCRIPTION_IS_REQUIRED: &#x27;Description is required&#x27;,
+  START_DATE_IS_REQUIRED: &#x27;StartDate is required&#x27;,
+  END_DATE_IS_REQUIRED: &#x27;EndDate is required&#x27;,
+  ID_IS_INVALID: &#x27;ID is invalid&#x27;,
+  NAME_MUST_BE_STRING: &#x27;Name must be string&#x27;,
+  API_PATH_MUST_BE_STRING: &#x27;ApiPath must be string&#x27;,
+  METHOD_MUST_BE_STRING: &#x27;Method must be string&#x27;,
+  MODULE_MUST_BE_STRING: &#x27;Module must be string&#x27;,
+  MODULE_IS_REQUIRED: &#x27;Module is required&#x27;,
+  PERMISSIONS_IS_REQUIRED: &#x27;Permissions is required&#x27;,
+  STATUS_MUST_BE_BOOLEAN: &#x27;Status must be boolean&#x27;,
+  PERMISSIONS_IS_ARRAY: &#x27;Permissions is array&#x27;,
+  MONGO_ID_IS_INVALID: &#x27;Mongo ID is invalid&#x27;,
+  SKILLS_MUST_BE_STRING: &#x27;Skills must be string&#x27;,
+  SKILLS_MUST_BE_ARRAY: &#x27;Skills must be array&#x27;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/resumes/schemas/resume.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ResumeSchema"></a>
+                    <span class="name">
+                        <span ><b>ResumeSchema</b></span>
+                        <a href="#ResumeSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Resume)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/roles/schemas/role.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RoleSchema"></a>
+                    <span class="name">
+                        <span ><b>RoleSchema</b></span>
+                        <a href="#RoleSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Role)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/subscribers/schemas/subscriber.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SubscriberSchema"></a>
+                    <span class="name">
+                        <span ><b>SubscriberSchema</b></span>
+                        <a href="#SubscriberSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Subscriber)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/Users/schemas/User.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UserSchema"></a>
+                    <span class="name">
+                        <span ><b>UserSchema</b></span>
+                        <a href="#UserSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(User)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/utils/validation.utils.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateObjectID"></a>
+                    <span class="name">
+                        <span ><b>validateObjectID</b></span>
+                        <a href="#validateObjectID"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(id: string) &#x3D;&gt; {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new UnauthorizedException(&#x27;Invalid ObjectId&#x27;)
+  }
+  return true
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

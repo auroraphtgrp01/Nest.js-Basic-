@@ -9,7 +9,7 @@ import { PaginationQuery } from '~/utils/pagination_query.utils'
 
 @Injectable()
 export class SubscribersService {
-  constructor(@InjectModel(Subscriber.name) private readonly subscriberService: SoftDeleteModel<SubcribersDocument>) {}
+  constructor(@InjectModel(Subscriber.name) private readonly subscriberService: SoftDeleteModel<SubcribersDocument>) { }
   async create(createSubscriberDto: CreateSubscriberDto, user: UserType) {
     const isExist = await this.subscriberService.findOne({ email: createSubscriberDto.email })
     if (isExist) throw new HttpException('Subscriber already exist', HttpStatus.BAD_REQUEST)
@@ -35,10 +35,10 @@ export class SubscribersService {
     return await this.subscriberService.findById(id)
   }
 
-  async update(id: string, updateSubscriberDto: UpdateSubscriberDto, user: UserType) {
+  async update(updateSubscriberDto: UpdateSubscriberDto, user: UserType) {
     const result = await this.subscriberService.updateOne(
       {
-        _id: id
+        email: user.email
       },
       {
         ...updateSubscriberDto,
@@ -46,7 +46,7 @@ export class SubscribersService {
           _id: user._id,
           email: user.email
         }
-      }
+      }, { upsert: true }
     )
     return result
   }
@@ -63,5 +63,8 @@ export class SubscribersService {
       }
     )
     return result
+  }
+  async getSkill(user: UserType) {
+    return await this.subscriberService.find({ email: user.email }, { skills: 1 })
   }
 }

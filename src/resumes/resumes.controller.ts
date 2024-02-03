@@ -5,11 +5,12 @@ import { UpdateResumeDto } from './dto/update-resume.dto'
 import { ResponseMessage, User } from '~/decorator/customize'
 import { UserType } from '~/interface/user.interface'
 import { ResumeStatus } from '~/constant/status'
-import { use } from 'passport'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags('Resumes')
 @Controller('resumes')
 export class ResumesController {
-  constructor(private readonly resumesService: ResumesService) {}
+  constructor(private readonly resumesService: ResumesService) { }
   /*
    * @Method: POST
    * @Route : /resumes

@@ -6,10 +6,12 @@ import { UpdateUserDto } from './dto/update-user.dto'
 import { Public, ResponseMessage, User } from '~/decorator/customize'
 import mongoose from 'mongoose'
 import { UserType } from '~/interface/user.interface'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags('Users')
 @Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
   /*
     Method: GET
     Path: /users

@@ -6,12 +6,15 @@ import { UserType } from '~/interface/user.interface'
 import { ResponseMessage, User } from '~/decorator/customize'
 import mongoose from 'mongoose'
 import { HTTP_STATUS } from '~/constant/HTTP_STATUS'
+import { ApiTags } from '@nestjs/swagger'
+
+@ApiTags('Companies')
 @Controller({
   path: 'companies',
   version: ['1', '2']
 })
 export class CompaniesController {
-  constructor(private readonly companiesService: CompaniesService) {}
+  constructor(private readonly companiesService: CompaniesService) { }
   @Post()
   create(@Body() createCompanyDto: CreateCompanyDto, @User() user: UserType) {
     return this.companiesService.createCompany(createCompanyDto, user)
